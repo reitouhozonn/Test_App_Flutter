@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:test_app/models/article.dart';
 import 'package:http/http.dart' as http;
+import 'package:test_app/models/user.dart';
+import 'package:test_app/widgets/article_container.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
@@ -36,10 +38,29 @@ class _SearchScreenState extends State<SearchScreen> {
               decoration: const InputDecoration(
                 hintText: '検索ワードを入力してください。',
               ),
-              onSubmitted: (String keyword) async {
-                final results = await searchQiita(keyword);
+              onSubmitted: (String value) async {
+                final results = await searchQiita(value);
                 setState(() => articles = results);
               },
+            ),
+          ),
+          // ArticleContainer(
+          //   article: Article(
+          //     title: 'test',
+          //     user: User(
+          //       id: 'test taro-',
+          //       profileImageUrl: 'https://example.com',
+          //     ),
+          //     createdAt: DateTime.now(),
+          //     tags: ['flutter', 'dart'],
+          //     url: 'https://example.com',
+          //   ),
+          // ),
+          Expanded(
+            child: ListView(
+              children: articles
+                  .map((article) => ArticleContainer(article: article))
+                  .toList(),
             ),
           ),
         ],

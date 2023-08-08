@@ -10,6 +10,6 @@ class User {
   factory User.formJson(dynamic json) {
     return User(
         id: json['id'] as String,
-        profileImageUrl: json['profileImageUrl'] as String);
+        profileImageUrl: json['profile_image_url'] as String);
   }
 }
