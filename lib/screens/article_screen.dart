@@ -15,10 +15,26 @@ class ArticleScreen extends StatefulWidget {
 }
 
 class _ArticleScreenState extends State<ArticleScreen> {
-  late WebViewController controller = WebViewController()
-    ..loadRequest(
-      Uri.parse(widget.article.url),
-    );
+  late final WebViewController _controller;
+
+  bool _isLoading = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = WebViewController()
+      ..setJavaScriptMode(JavaScriptMode.unrestricted)
+      ..setNavigationDelegate(NavigationDelegate(onPageStarted: (String url) {
+        setState(() {
+          _isLoading = true;
+        });
+      }, onPageFinished: (String url) {
+        setState(() {
+          _isLoading = false;
+        });
+      }))
+      ..loadRequest(Uri.parse(widget.article.url));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +42,37 @@ class _ArticleScreenState extends State<ArticleScreen> {
       appBar: AppBar(
         title: const Text('Article Page'),
       ),
-      body: WebViewWidget(controller: controller),
+      body: Column(children: [
+        if (_isLoading) const LinearProgressIndicator(),
+        Expanded(child: WebViewWidget(controller: _controller)),
+        // Container(
+        //   color: Colors.lightBlue,
+        //   child: SafeArea(
+        //     child: Row(
+        //       children: [
+        //         IconButton(
+        //           icon: const Icon(
+        //             Icons.arrow_back,
+        //           ),
+        //           color: Colors.white,
+        //           onPressed: () async {
+        //             _controller.goBack();
+        //           },
+        //         ),
+        //         IconButton(
+        //           icon: const Icon(
+        //             Icons.arrow_forward,
+        //           ),
+        //           color: Colors.white,
+        //           onPressed: () async {
+        //             _controller.goForward();
+        //           },
+        //         ),
+        //       ],
+        //     ),
+        //   ),
+        // ),
+      ]),
     );
   }
 }
