@@ -22,8 +22,8 @@ class Article {
       title: json['title'] as String,
       user: User.formJson(json['user']),
       url: json['url'] as String,
-      createdAt: DateTime.parse(json['createdAt'] as String),
-      likesCount: json['likesCount'] as int,
+      createdAt: DateTime.parse(json['created_at'] as String),
+      likesCount: json['likes_count'] as int,
       tags: List<String>.from(json['tags'].map((tag) => tag['name'])),
     );
   }

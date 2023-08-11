@@ -26,7 +26,7 @@ class _ArticleScreenState extends State<ArticleScreen> {
       appBar: AppBar(
         title: const Text('Article Page'),
       ),
-      body: null,
+      body: WebViewWidget(controller: controller),
     );
   }
 }
