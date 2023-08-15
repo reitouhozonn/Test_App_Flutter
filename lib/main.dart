@@ -13,7 +13,7 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Test Search',
+      title: 'Search Word',
       theme: ThemeData(
         primarySwatch: Colors.green,
         fontFamily: 'Hiragino Sans',

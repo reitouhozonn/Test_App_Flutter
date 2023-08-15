@@ -21,7 +21,7 @@ class _SearchScreenState extends State<SearchScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Test Search'),
+        title: const Text('Search Qiita'),
       ),
       body: Column(
         children: [
